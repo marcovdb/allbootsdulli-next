@@ -38,7 +38,7 @@
                                     Bootlegs
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <a class="dropdown-item" href="#">All artists</a>
+                                    <router-link to="/bootlegs" class="dropdown-item">All artists</router-link>
                                     <div class="dropdown-divider"></div>
                                     <template v-for="artist in artists">
                                         <router-link :to="'bootlegs/artist/' + artist.id" class="dropdown-item" :key="artist.id">{{ artist.name }}</router-link>
@@ -78,7 +78,9 @@ export default {
 @import (reference) './assets/variables.less';
 
 body {
+    background-attachment: fixed;
     background-image: url('./assets/background.jpg');
+    background-repeat: no-repeat;
     background-size: cover;
 }
 
