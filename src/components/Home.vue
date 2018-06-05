@@ -3,10 +3,10 @@
         <div class="row">
             <div class="col-lg-9">
                 <h3 class="my-4">Latest news</h3>
-                <div class="card bg-secondary my-3 text-dark" v-if="news && news.length">
+                <div class="card bg-secondary my-3 text-light" v-if="news && news.length">
                     <div class="card-body">
                         <h5 class="card-title">{{ news[0].title }} <span class="badge" v-moment:fromNow="news[0].date_added"></span></h5>
-                        <div class="card-text text-dark" v-html="news[0].content_parsed"></div>
+                        <div class="card-text" v-html="news[0].content_parsed"></div>
                     </div>
                 </div>
                 <h3 class="my-4">News of yore</h3>

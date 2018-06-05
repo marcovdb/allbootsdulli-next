@@ -7,6 +7,8 @@ import VuePaginate from 'vue-paginate'
 import './directives'
 import './mixins'
 
+import 'datalist-polyfill'
+
 Vue.config.productionTip = false
 Vue.use(Vuex)
 Vue.use(VuePaginate)
