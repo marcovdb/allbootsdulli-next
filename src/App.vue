@@ -76,7 +76,8 @@ export default {
     },
     methods: {
         goToBootlegs: debounce(function(event) {
-            this.$router.push({ path: 'bootlegs', query: { songTitle: encodeURIComponent(event.target.value) }});
+            let query = (event.target.value) ? { songTitle: encodeURIComponent(event.target.value) } : null;
+            this.$router.push({ path: 'bootlegs', query: query });
         }, 500)
     },
     created: function() {

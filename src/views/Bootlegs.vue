@@ -10,12 +10,18 @@
                 <h3 class="mt-4">Filter by venue</h3>
                 <div class="form-group">
                     <datalist id="venues">
-                        <option v-for="venue in venues" :key="venue.id" :value="venue.name"></option>
+                        <option v-for="venue in allVenues" :key="venue.id" :value="venue.name"></option>
                     </datalist>
                     <input class="form-control form-control-sm" type="text" list="venues" placeholder="Type a venue name..." @input="debounceInput">
                 </div>
             </div>
             <div class="col-sm-8 col-md-9">
+                <div class="card bg-transparent">
+                    <div class="card-body">
+                        <span class="badge badge-pill badge-primary" v-if="venueFilter">Venue: {{ venueFilter }} <i class="fas fa-times"></i></span>
+                        <span class="badge badge-pill badge-primary" v-if="songFilter">Song: {{ songFilter }} <i class="fas fa-times"></i></span>
+                    </div>
+                </div>
                 <table class="table table-striped table-sm mt-2">
                     <thead>
                         <tr>
@@ -47,10 +53,11 @@ export default {
     data: function () {
         return {
             allShows: [],
+            allVenues: [],
             artists: [],
             artistFilter: [],
             paginate: ['shows'],
-            venues: [],
+            songFilter: '',
             venueFilter: ''
         }
     },
@@ -80,9 +87,11 @@ export default {
         getShows () {
             if (this.$route.query.songTitle) {
                 let songTitle = decodeURIComponent(this.$route.query.songTitle);
+                this.songFilter = songTitle;
                 this.get(`shows/${songTitle}`).then((response) => this.allShows = response.data);
             } else {
                 this.get('shows').then((response) => this.allShows = response.data)
+                this.songFilter = '';
             }
         }
     },
@@ -92,7 +101,7 @@ export default {
             this.setArtistFilter()
         })
         
-        this.get('venues').then((response) => this.venues = response.data)
+        this.get('venues').then((response) => this.allVenues = response.data)
 
         this.getShows()
     },
