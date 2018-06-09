@@ -65,6 +65,8 @@
 </template>
 
 <script>
+import debounce from 'lodash/debounce'
+
 export default {
     data: function () {
         return {
@@ -73,9 +75,9 @@ export default {
         }
     },
     methods: {
-        goToBootlegs(event) {
+        goToBootlegs: debounce(function(event) {
             this.$router.push({ path: 'bootlegs', query: { songTitle: encodeURIComponent(event.target.value) }});
-        }
+        }, 500)
     },
     created: function() {
         this.get('artists').then((response) => this.artists = response.data)
