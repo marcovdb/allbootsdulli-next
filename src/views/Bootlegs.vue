@@ -75,20 +75,30 @@ export default {
             }
         },
         debounceInput: debounce(function(event) {
-            console.log(event)
             this.venueFilter = event.target.value
-        }, 500)
+        }, 500),
+        getShows () {
+            if (this.$route.query.songTitle) {
+                let songTitle = decodeURIComponent(this.$route.query.songTitle);
+                this.get(`shows/${songTitle}`).then((response) => this.allShows = response.data);
+            } else {
+                this.get('shows').then((response) => this.allShows = response.data)
+            }
+        }
     },
     created: function () {
         this.get('artists').then((response) => {
             this.artists = response.data
             this.setArtistFilter()
         })
-        this.get('shows').then((response) => this.allShows = response.data)
+        
         this.get('venues').then((response) => this.venues = response.data)
+
+        this.getShows()
     },
     watch: {
-        $route: function() {
+        $route: function(val) {
+            this.getShows()
             this.setArtistFilter()
         }
     }
