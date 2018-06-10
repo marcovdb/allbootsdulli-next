@@ -52,7 +52,7 @@
                         </li>
                     </ul>
                     <form class="form-inline my-2 my-lg-0 ml-auto">
-                        <input class="form-control form-control-sm" type="search" placeholder="Search..." list="songs" aria-label="Search" @input="goToBootlegs">
+                        <input class="form-control form-control-sm" type="search" placeholder="Search song" list="songs" aria-label="Search" @input="goToBootlegs">
                         <datalist id="songs">
                             <option v-for="song in songs" :key="song.id" :value="song.title"></option>
                         </datalist>

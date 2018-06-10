@@ -18,8 +18,8 @@
             <div class="col-sm-8 col-md-9">
                 <div class="card bg-transparent">
                     <div class="card-body">
-                        <span class="badge badge-pill badge-primary" v-if="venueFilter">Venue: {{ venueFilter }} <i class="fas fa-times"></i></span>
-                        <span class="badge badge-pill badge-primary" v-if="songFilter">Song: {{ songFilter }} <i class="fas fa-times"></i></span>
+                        <span class="badge badge-pill badge-primary" v-if="venueFilter" @click="venueFilter = ''">Venue: {{ venueFilter }} <i class="fas fa-times"></i></span>
+                        <span class="badge badge-pill badge-primary" v-if="songFilter" @click="$router.push({ path: 'bootlegs', query: null });">Song: {{ songFilter }} <i class="fas fa-times"></i></span>
                     </div>
                 </div>
                 <table class="table table-striped table-sm mt-2">
@@ -106,7 +106,7 @@ export default {
         this.getShows()
     },
     watch: {
-        $route: function(val) {
+        $route: function(newVal) {
             this.getShows()
             this.setArtistFilter()
         }
