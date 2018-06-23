@@ -106,7 +106,7 @@ export default {
         this.getShows()
     },
     watch: {
-        $route: function(newVal) {
+        $route () {
             this.getShows()
             this.setArtistFilter()
         }
